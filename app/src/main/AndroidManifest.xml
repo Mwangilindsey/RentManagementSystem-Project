@@ -27,6 +27,10 @@
             android:exported="false" />
 
         <activity
+            android:name=".ViewPropertiesActivity"
+            android:exported="false" />
+
+        <activity
             android:name=".DashboardActivity"
             android:exported="false" />
     </application>

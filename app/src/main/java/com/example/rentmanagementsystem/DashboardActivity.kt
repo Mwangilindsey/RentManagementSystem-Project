@@ -1,37 +1,49 @@
 package com.example.rentmanagementsystem
 
 import android.content.Intent
-import android.widget.Button
 import android.os.Bundle
+import android.widget.Button
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
 class DashboardActivity : AppCompatActivity() {
 
+    private lateinit var dbHelper: PropertyDatabaseHelper
+    private lateinit var tvTotalProperties: TextView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContentView(R.layout.activity_dashboard)
 
-        val btnManageProperties =
-            findViewById<Button>(R.id.btnManageProperties)
+        dbHelper = PropertyDatabaseHelper(this)
 
-        // Opens the manage properties screen when the button is clicked
+        tvTotalProperties = findViewById(R.id.tvTotalProperties)
+
+        val btnManageProperties = findViewById<Button>(R.id.btnManageProperties)
+        val welcomeText = findViewById<TextView>(R.id.tvWelcome)
+
         btnManageProperties.setOnClickListener {
-            val intent = Intent(this, ManagePropertiesActivity::class.java)
+            val intent = Intent(this, ViewPropertiesActivity::class.java)
             startActivity(intent)
         }
 
         val email = intent.getStringExtra("email")
-
-        val welcomeText = findViewById<android.widget.TextView>(
-            R.id.tvWelcome
-        )
-
-        // This displays a welcome message using the user's email
         welcomeText.text = if (email.isNullOrBlank()) {
             "Welcome back!"
         } else {
             "Welcome, $email"
         }
+
+        updateDashboardStats()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        updateDashboardStats()
+    }
+
+    private fun updateDashboardStats() {
+        val propertyCount = dbHelper.getPropertiesCount()
+        tvTotalProperties.text = propertyCount.toString()
     }
 }
