@@ -31,12 +31,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
+            android:autofillHints="name"
             android:hint="Property Name"
             android:inputType="textCapWords"
             android:minHeight="48dp"
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
-            android:singleLine="true" />
+            android:singleLine="true"
+            android:textColor="#102B46"
+            android:textColorHint="#94A3B8" />
 
         <TextView
             android:layout_width="match_parent"
@@ -52,11 +55,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
+            android:autofillHints="postalAddress"
             android:hint="Address"
             android:inputType="textCapSentences"
             android:minHeight="48dp"
             android:paddingStart="8dp"
-            android:paddingEnd="8dp" />
+            android:paddingEnd="8dp"
+            android:textColor="#102B46"
+            android:textColorHint="#94A3B8" />
 
         <TextView
             android:layout_width="match_parent"
@@ -72,12 +78,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
+            android:autofillHints="number"
             android:hint="Number of Units"
             android:inputType="number"
             android:minHeight="48dp"
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
-            android:singleLine="true" />
+            android:singleLine="true"
+            android:textColor="#102B46"
+            android:textColorHint="#94A3B8" />
 
         <TextView
             android:layout_width="match_parent"
@@ -93,12 +102,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
+            android:autofillHints="number"
             android:hint="Monthly Rent"
             android:inputType="numberDecimal"
             android:minHeight="48dp"
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
-            android:singleLine="true" />
+            android:singleLine="true"
+            android:textColor="#102B46"
+            android:textColorHint="#94A3B8" />
 
     </LinearLayout>
 

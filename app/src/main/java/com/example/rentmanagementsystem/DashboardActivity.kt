@@ -6,7 +6,6 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
-
 class DashboardActivity : AppCompatActivity() {
 
     private lateinit var dbHelper: PropertyDatabaseHelper
@@ -25,6 +24,9 @@ class DashboardActivity : AppCompatActivity() {
         val btnManageProperties =
             findViewById<Button>(R.id.btnManageProperties)
 
+        val btnViewProperties =
+            findViewById<Button>(R.id.btnViewProperties)
+
         val btnManageTenants =
             findViewById<Button>(R.id.btnManageTenants)
 
@@ -33,18 +35,28 @@ class DashboardActivity : AppCompatActivity() {
 
         val welcomeText = findViewById<TextView>(R.id.tvWelcome)
 
+        // Opens the Manage Properties screen
         btnManageProperties.setOnClickListener {
+            startActivity(
+                Intent(this, ManagePropertiesActivity::class.java)
+            )
+        }
+
+        // Opens the View Properties screen
+        btnViewProperties.setOnClickListener {
             startActivity(
                 Intent(this, ViewPropertiesActivity::class.java)
             )
         }
 
+        // Opens the Manage Tenants screen
         btnManageTenants.setOnClickListener {
             startActivity(
                 Intent(this, ManageTenantsActivity::class.java)
             )
         }
 
+        // Opens the View Tenants screen
         btnViewTenants.setOnClickListener {
             startActivity(
                 Intent(this, ViewTenantsActivity::class.java)
