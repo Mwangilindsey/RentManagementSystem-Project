@@ -14,9 +14,21 @@
         android:orientation="vertical"
         android:padding="20dp">
 
+        <Button
+            android:id="@+id/btnBack"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="-8dp"
+            android:text="← Back to Dashboard"
+            android:textAllCaps="false"
+            android:textColor="#087F8C"
+            android:textSize="14sp" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
             android:text="Property Directory"
             android:textColor="#102B46"
             android:textSize="24sp"

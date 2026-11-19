@@ -3,6 +3,7 @@ package com.example.rentmanagementsystem
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -26,9 +27,14 @@ class ViewPropertiesActivity : AppCompatActivity() {
 
         dbHelper = PropertyDatabaseHelper(this)
 
+        val btnBack = findViewById<Button>(R.id.btnBack)
         rvProperties = findViewById(R.id.rvProperties)
         layoutEmptyState = findViewById(R.id.layoutEmptyState)
         tvSubtitle = findViewById(R.id.tvSubtitle)
+
+        btnBack.setOnClickListener {
+            finish()
+        }
 
         rvProperties.layoutManager = LinearLayoutManager(this)
 

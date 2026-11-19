@@ -11,9 +11,21 @@
         android:orientation="vertical"
         android:padding="24dp">
 
+        <Button
+            android:id="@+id/btnBack"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="-8dp"
+            android:text="← Back to Dashboard"
+            android:textAllCaps="false"
+            android:textColor="#087F8C"
+            android:textSize="14sp" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
             android:text="Manage Tenants"
             android:textColor="#102B46"
             android:textSize="26sp"
@@ -47,7 +59,9 @@
             android:minHeight="52dp"
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
-            android:singleLine="true" />
+            android:singleLine="true"
+            android:textColor="#102B46"
+            android:textColorHint="#94A3B8" />
 
         <!-- Phone -->
         <TextView
@@ -69,7 +83,9 @@
             android:minHeight="52dp"
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
-            android:singleLine="true" />
+            android:singleLine="true"
+            android:textColor="#102B46"
+            android:textColorHint="#94A3B8" />
 
         <!-- Email -->
         <TextView
@@ -91,7 +107,9 @@
             android:minHeight="52dp"
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
-            android:singleLine="true" />
+            android:singleLine="true"
+            android:textColor="#102B46"
+            android:textColorHint="#94A3B8" />
 
         <!-- Property Selection -->
         <TextView
@@ -129,7 +147,9 @@
             android:minHeight="52dp"
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
-            android:singleLine="true" />
+            android:singleLine="true"
+            android:textColor="#102B46"
+            android:textColorHint="#94A3B8" />
 
         <!-- Monthly Rent -->
         <TextView
@@ -151,7 +171,9 @@
             android:minHeight="52dp"
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
-            android:singleLine="true" />
+            android:singleLine="true"
+            android:textColor="#102B46"
+            android:textColorHint="#94A3B8" />
 
         <!-- Save Tenant Button -->
         <Button

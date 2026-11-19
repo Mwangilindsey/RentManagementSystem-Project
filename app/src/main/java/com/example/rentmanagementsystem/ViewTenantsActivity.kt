@@ -1,16 +1,20 @@
 package com.example.rentmanagementsystem
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
+import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import android.widget.ArrayAdapter
+import android.widget.Button
 import android.widget.EditText
 import android.widget.Spinner
 import android.util.Patterns
+import androidx.appcompat.app.AlertDialog
 
 class ViewTenantsActivity : AppCompatActivity() {
 
@@ -25,9 +29,14 @@ class ViewTenantsActivity : AppCompatActivity() {
 
         dbHelper = PropertyDatabaseHelper(this)
 
+        val btnBack = findViewById<Button>(R.id.btnBack)
         rvTenants = findViewById(R.id.rvTenants)
         tvTenantCount = findViewById(R.id.tvTenantCount)
         tvEmptyTenants = findViewById(R.id.tvEmptyTenants)
+
+        btnBack.setOnClickListener {
+            finish()
+        }
 
         rvTenants.layoutManager = LinearLayoutManager(this)
 
@@ -56,7 +65,7 @@ class ViewTenantsActivity : AppCompatActivity() {
             },
             onDeleteClick = { tenant ->
 
-                androidx.appcompat.app.AlertDialog.Builder(this)
+                AlertDialog.Builder(this)
                     .setTitle("Delete Tenant")
                     .setMessage("Are you sure you want to delete ${tenant.fullName}?")
                     .setPositiveButton("Delete") { _, _ ->
@@ -118,11 +127,24 @@ class ViewTenantsActivity : AppCompatActivity() {
             "${it.name} - ${it.address}"
         }
 
-        val adapter = ArrayAdapter(
+        val adapter = object : ArrayAdapter<String>(
             this,
             android.R.layout.simple_spinner_item,
             propertyNames
-        )
+        ) {
+            override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+                val view = super.getView(position, convertView, parent) as TextView
+                view.setTextColor(Color.parseColor("#102B46"))
+                return view
+            }
+
+            override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View {
+                val view = super.getDropDownView(position, convertView, parent) as TextView
+                view.setTextColor(Color.parseColor("#102B46"))
+                view.setBackgroundColor(Color.WHITE)
+                return view
+            }
+        }
 
         adapter.setDropDownViewResource(
             android.R.layout.simple_spinner_dropdown_item
@@ -144,7 +166,7 @@ class ViewTenantsActivity : AppCompatActivity() {
             spProperty.setSelection(selectedIndex)
         }
 
-        val dialog = androidx.appcompat.app.AlertDialog.Builder(this)
+        val dialog = AlertDialog.Builder(this)
             .setTitle("Edit Tenant")
             .setView(dialogView)
             .setPositiveButton("Update", null)
@@ -154,7 +176,7 @@ class ViewTenantsActivity : AppCompatActivity() {
         dialog.setOnShowListener {
 
             dialog.getButton(
-                androidx.appcompat.app.AlertDialog.BUTTON_POSITIVE
+                AlertDialog.BUTTON_POSITIVE
             ).setOnClickListener {
 
                 val name = etName.text.toString().trim()

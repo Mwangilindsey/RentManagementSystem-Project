@@ -163,13 +163,13 @@
 
         <Button
             android:id="@+id/btnViewProperties"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="match_parent"
             android:layout_height="52dp"
             android:layout_marginTop="12dp"
+            android:backgroundTint="#087F8C"
             android:text="View All Properties"
             android:textAllCaps="false"
-            android:textColor="#087F8C"
+            android:textColor="#FFFFFF"
             android:textSize="16sp" />
 
         <Button

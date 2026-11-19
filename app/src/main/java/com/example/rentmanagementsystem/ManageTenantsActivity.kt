@@ -1,10 +1,15 @@
 package com.example.rentmanagementsystem
 
+import android.graphics.Color
 import android.os.Bundle
+import android.util.Patterns
+import android.view.View
+import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Spinner
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
@@ -19,6 +24,7 @@ class ManageTenantsActivity : AppCompatActivity() {
 
         dbHelper = PropertyDatabaseHelper(this)
 
+        val btnBack = findViewById<Button>(R.id.btnBack)
         val etTenantName = findViewById<EditText>(R.id.etTenantName)
         val etTenantPhone = findViewById<EditText>(R.id.etTenantPhone)
         val etTenantEmail = findViewById<EditText>(R.id.etTenantEmail)
@@ -26,6 +32,10 @@ class ManageTenantsActivity : AppCompatActivity() {
         val etTenantUnit = findViewById<EditText>(R.id.etTenantUnit)
         val etTenantRent = findViewById<EditText>(R.id.etTenantRent)
         val btnSaveTenant = findViewById<Button>(R.id.btnSaveTenant)
+
+        btnBack.setOnClickListener {
+            finish()
+        }
 
         // Load existing properties from SQLite
         properties = dbHelper.getAllProperties()
@@ -36,11 +46,24 @@ class ManageTenantsActivity : AppCompatActivity() {
             propertyNames.add("${property.name} - ${property.address}")
         }
 
-        val adapter = ArrayAdapter(
+        val adapter = object : ArrayAdapter<String>(
             this,
             android.R.layout.simple_spinner_item,
             propertyNames
-        )
+        ) {
+            override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+                val view = super.getView(position, convertView, parent) as TextView
+                view.setTextColor(Color.parseColor("#102B46"))
+                return view
+            }
+
+            override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View {
+                val view = super.getDropDownView(position, convertView, parent) as TextView
+                view.setTextColor(Color.parseColor("#102B46"))
+                view.setBackgroundColor(Color.WHITE)
+                return view
+            }
+        }
 
         adapter.setDropDownViewResource(
             android.R.layout.simple_spinner_dropdown_item
@@ -73,7 +96,7 @@ class ManageTenantsActivity : AppCompatActivity() {
                     etTenantEmail.requestFocus()
                 }
 
-                !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches() -> {
+                !Patterns.EMAIL_ADDRESS.matcher(email).matches() -> {
                     etTenantEmail.error = "Enter a valid email address"
                     etTenantEmail.requestFocus()
                 }
@@ -100,7 +123,7 @@ class ManageTenantsActivity : AppCompatActivity() {
                 }
 
                 rentText.isEmpty() ||
-                        rentText.toDoubleOrNull() == null ||
+                        rentText.toIntOrNull() == null ||
                         rentText.toDouble() <= 0 -> {
                     etTenantRent.error = "Enter a valid monthly rent"
                     etTenantRent.requestFocus()
