@@ -20,9 +20,17 @@ class DashboardActivity : AppCompatActivity() {
         tvTotalProperties = findViewById(R.id.tvTotalProperties)
 
         val btnManageProperties = findViewById<Button>(R.id.btnManageProperties)
+        val btnViewProperties = findViewById<Button>(R.id.btnViewProperties)
         val welcomeText = findViewById<TextView>(R.id.tvWelcome)
 
+        // Opens the Add Property screen (Stage 1 / Manage Properties)
         btnManageProperties.setOnClickListener {
+            val intent = Intent(this, ManagePropertiesActivity::class.java)
+            startActivity(intent)
+        }
+
+        // Opens the View Properties directory screen (Stage 2)
+        btnViewProperties.setOnClickListener {
             val intent = Intent(this, ViewPropertiesActivity::class.java)
             startActivity(intent)
         }

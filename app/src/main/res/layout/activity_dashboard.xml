@@ -157,9 +157,20 @@
             android:layout_height="52dp"
             android:layout_marginTop="16dp"
             android:backgroundTint="#087F8C"
-            android:text="Manage Properties"
+            android:text="Add New Property"
             android:textAllCaps="false"
             android:textColor="#FFFFFF" />
+
+        <Button
+            android:id="@+id/btnViewProperties"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginTop="12dp"
+            android:text="View All Properties"
+            android:textAllCaps="false"
+            android:textColor="#087F8C"
+            android:textSize="16sp" />
 
         <Button
             android:id="@+id/btnManageTenants"
