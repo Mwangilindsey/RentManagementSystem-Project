@@ -15,12 +15,17 @@ class ManagePropertiesActivity : AppCompatActivity() {
 
         val dbHelper = PropertyDatabaseHelper(this)
 
+        val btnBack = findViewById<Button>(R.id.btnBack)
         val etPropertyName = findViewById<EditText>(R.id.etPropertyName)
         val etPropertyAddress = findViewById<EditText>(R.id.etPropertyAddress)
         val etNumberOfUnits = findViewById<EditText>(R.id.etNumberOfUnits)
         val etMonthlyRent = findViewById<EditText>(R.id.etMonthlyRent)
         val btnSaveProperty = findViewById<Button>(R.id.btnSaveProperty)
         val btnViewProperties = findViewById<Button>(R.id.btnViewProperties)
+
+        btnBack.setOnClickListener {
+            finish()
+        }
 
         btnViewProperties.setOnClickListener {
             val intent = Intent(this, ViewPropertiesActivity::class.java)
