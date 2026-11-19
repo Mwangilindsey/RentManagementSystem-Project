@@ -27,6 +27,18 @@
             android:exported="false" />
 
         <activity
+            android:name=".ViewPropertiesActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ManageTenantsActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ViewTenantsActivity"
+            android:exported="false" />
+
+        <activity
             android:name=".DashboardActivity"
             android:exported="false" />
     </application>

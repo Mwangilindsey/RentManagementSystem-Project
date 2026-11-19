@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="#FFFFFF"
+    android:padding="16dp"
+    android:layout_marginBottom="12dp">
+
+    <TextView
+        android:id="@+id/tvItemTenantName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tenant Name"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="#102B46" />
+
+    <TextView
+        android:id="@+id/tvItemTenantPhone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:text="Phone"
+        android:textColor="#60758A"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/tvItemTenantEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Email"
+        android:textColor="#60758A"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/tvItemTenantProperty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Property"
+        android:textColor="#245B85"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvItemTenantUnitRent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Unit and Rent"
+        android:textColor="#102B46"
+        android:textSize="14sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="end"
+        android:layout_marginTop="12dp">
+
+        <Button
+            android:id="@+id/btnEditTenant"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Edit" />
+
+        <Button
+            android:id="@+id/btnDeleteTenant"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="Delete" />
+
+    </LinearLayout>
+
+</LinearLayout>
