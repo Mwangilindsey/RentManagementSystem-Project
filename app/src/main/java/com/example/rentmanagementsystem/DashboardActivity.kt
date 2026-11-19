@@ -6,6 +6,7 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
+
 class DashboardActivity : AppCompatActivity() {
 
     private lateinit var dbHelper: PropertyDatabaseHelper
