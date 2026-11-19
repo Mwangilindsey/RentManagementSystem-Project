@@ -162,12 +162,32 @@
             android:textColor="#FFFFFF" />
 
         <Button
+            android:id="@+id/btnViewProperties"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginTop="12dp"
+            android:backgroundTint="#087F8C"
+            android:text="View Properties"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF" />
+
+        <Button
             android:id="@+id/btnManageTenants"
             android:layout_width="match_parent"
             android:layout_height="52dp"
             android:layout_marginTop="12dp"
             android:backgroundTint="#087F8C"
             android:text="Manage Tenants"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF" />
+
+        <Button
+            android:id="@+id/btnViewTenants"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginTop="12dp"
+            android:backgroundTint="#087F8C"
+            android:text="View Tenants"
             android:textAllCaps="false"
             android:textColor="#FFFFFF" />
 
