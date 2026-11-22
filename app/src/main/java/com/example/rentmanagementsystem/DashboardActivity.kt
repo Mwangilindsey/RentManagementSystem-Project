@@ -5,12 +5,14 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import java.util.Locale
 
 class DashboardActivity : AppCompatActivity() {
 
     private lateinit var dbHelper: PropertyDatabaseHelper
     private lateinit var tvTotalProperties: TextView
     private lateinit var tvTotalTenants: TextView
+    private lateinit var tvRentCollected: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,6 +22,7 @@ class DashboardActivity : AppCompatActivity() {
 
         tvTotalProperties = findViewById(R.id.tvTotalProperties)
         tvTotalTenants = findViewById(R.id.tvTotalTenants)
+        tvRentCollected = findViewById(R.id.tvRentCollected)
 
         val btnManageProperties =
             findViewById<Button>(R.id.btnManageProperties)
@@ -30,8 +33,8 @@ class DashboardActivity : AppCompatActivity() {
         val btnManageTenants =
             findViewById<Button>(R.id.btnManageTenants)
 
-        val btnViewTenants =
-            findViewById<Button>(R.id.btnViewTenants)
+        val btnRecordPayment =
+            findViewById<Button>(R.id.btnRecordPayment)
 
         val welcomeText = findViewById<TextView>(R.id.tvWelcome)
 
@@ -56,10 +59,10 @@ class DashboardActivity : AppCompatActivity() {
             )
         }
 
-        // Opens the View Tenants screen
-        btnViewTenants.setOnClickListener {
+        // Opens the Record Rent Payment screen
+        btnRecordPayment.setOnClickListener {
             startActivity(
-                Intent(this, ViewTenantsActivity::class.java)
+                Intent(this, RecordPaymentActivity::class.java)
             )
         }
 
@@ -85,8 +88,15 @@ class DashboardActivity : AppCompatActivity() {
     private fun updateDashboardStats() {
         val propertyCount = dbHelper.getPropertiesCount()
         val tenantCount = dbHelper.getAllTenants().size
+        val totalRentCollected = dbHelper.getTotalPayments()
 
         tvTotalProperties.text = propertyCount.toString()
         tvTotalTenants.text = tenantCount.toString()
+
+        tvRentCollected.text = String.format(
+            Locale.getDefault(),
+            "KSh %,.2f",
+            totalRentCollected
+        )
     }
 }

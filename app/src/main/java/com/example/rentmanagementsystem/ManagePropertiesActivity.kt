@@ -27,12 +27,15 @@ class ManagePropertiesActivity : AppCompatActivity() {
             finish()
         }
 
+        // Open the properties list only when this button is clicked.
         btnViewProperties.setOnClickListener {
             val intent = Intent(this, ViewPropertiesActivity::class.java)
             startActivity(intent)
         }
 
+        // Save the property without navigating away from this screen.
         btnSaveProperty.setOnClickListener {
+
             val propertyName = etPropertyName.text.toString().trim()
             val propertyAddress = etPropertyAddress.text.toString().trim()
             val numberOfUnits = etNumberOfUnits.text.toString().trim()
@@ -83,9 +86,6 @@ class ManagePropertiesActivity : AppCompatActivity() {
                         etNumberOfUnits.text.clear()
                         etMonthlyRent.text.clear()
 
-                        // Navigate to view properties list
-                        val intent = Intent(this, ViewPropertiesActivity::class.java)
-                        startActivity(intent)
                     } else {
                         Toast.makeText(
                             this,

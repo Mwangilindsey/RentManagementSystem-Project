@@ -170,7 +170,7 @@
             android:text="View All Properties"
             android:textAllCaps="false"
             android:textColor="#FFFFFF"
-            android:textSize="16sp" />
+            android:textSize="14sp" />
 
         <Button
             android:id="@+id/btnManageTenants"
@@ -183,32 +183,12 @@
             android:textColor="#FFFFFF" />
 
         <Button
-            android:id="@+id/btnViewTenants"
-            android:layout_width="match_parent"
-            android:layout_height="52dp"
-            android:layout_marginTop="12dp"
-            android:backgroundTint="#087F8C"
-            android:text="View Tenants"
-            android:textAllCaps="false"
-            android:textColor="#FFFFFF" />
-
-        <Button
             android:id="@+id/btnRecordPayment"
             android:layout_width="match_parent"
             android:layout_height="52dp"
             android:layout_marginTop="12dp"
             android:backgroundTint="#087F8C"
             android:text="Record Rent Payment"
-            android:textAllCaps="false"
-            android:textColor="#FFFFFF" />
-
-        <Button
-            android:id="@+id/btnPaymentHistory"
-            android:layout_width="match_parent"
-            android:layout_height="52dp"
-            android:layout_marginTop="12dp"
-            android:backgroundTint="#087F8C"
-            android:text="Payment History"
             android:textAllCaps="false"
             android:textColor="#FFFFFF" />
 

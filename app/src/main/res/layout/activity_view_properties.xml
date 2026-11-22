@@ -20,7 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="-8dp"
-            android:text="← Back to Dashboard"
+            android:text="← Back"
             android:textAllCaps="false"
             android:textColor="#087F8C"
             android:textSize="14sp" />
