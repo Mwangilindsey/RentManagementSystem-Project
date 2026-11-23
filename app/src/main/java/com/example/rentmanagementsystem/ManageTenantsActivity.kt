@@ -44,7 +44,6 @@ class ManageTenantsActivity : AppCompatActivity() {
             finish()
         }
 
-        // View All Tenants button
         btnViewTenants.setOnClickListener {
             val intent = Intent(this, ViewTenantsActivity::class.java)
             startActivity(intent)

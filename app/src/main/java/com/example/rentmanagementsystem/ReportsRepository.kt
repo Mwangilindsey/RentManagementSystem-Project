@@ -3,10 +3,6 @@ package com.example.rentmanagementsystem
 import android.content.Context
 import java.util.Calendar
 
-/**
- * Your tenants table has no due-date column, so every tenant's rent is treated
- * as due on this day of the month. Change it here if needed.
- */
 const val RENT_DUE_DAY = 5
 
 data class TenantBalance(

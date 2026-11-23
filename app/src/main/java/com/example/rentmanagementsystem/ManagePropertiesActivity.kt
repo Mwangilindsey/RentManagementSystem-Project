@@ -33,7 +33,6 @@ class ManagePropertiesActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        // Save the property without navigating away from this screen.
         btnSaveProperty.setOnClickListener {
 
             val propertyName = etPropertyName.text.toString().trim()

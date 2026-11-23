@@ -14,6 +14,7 @@ import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
 import java.util.Locale
 import java.util.concurrent.TimeUnit
+import androidx.work.OneTimeWorkRequestBuilder
 
 class DashboardActivity : AppCompatActivity() {
 
@@ -35,9 +36,6 @@ class DashboardActivity : AppCompatActivity() {
         val btnManageProperties =
             findViewById<Button>(R.id.btnManageProperties)
 
-        val btnViewProperties =
-            findViewById<Button>(R.id.btnViewProperties)
-
         val btnManageTenants =
             findViewById<Button>(R.id.btnManageTenants)
 
@@ -49,35 +47,28 @@ class DashboardActivity : AppCompatActivity() {
 
         val welcomeText = findViewById<TextView>(R.id.tvWelcome)
 
-        // Opens the Manage Properties screen
+
         btnManageProperties.setOnClickListener {
             startActivity(
                 Intent(this, ManagePropertiesActivity::class.java)
             )
         }
 
-        // Opens the View Properties screen
-        btnViewProperties.setOnClickListener {
-            startActivity(
-                Intent(this, ViewPropertiesActivity::class.java)
-            )
-        }
 
-        // Opens the Manage Tenants screen
         btnManageTenants.setOnClickListener {
             startActivity(
                 Intent(this, ManageTenantsActivity::class.java)
             )
         }
 
-        // Opens the Record Rent Payment screen
+
         btnRecordPayment.setOnClickListener {
             startActivity(
                 Intent(this, RecordPaymentActivity::class.java)
             )
         }
 
-        // Opens the Reports screen
+
         btnReports.setOnClickListener {
             startActivity(
                 Intent(this, ReportsActivity::class.java)
@@ -93,13 +84,14 @@ class DashboardActivity : AppCompatActivity() {
         }
 
         requestNotificationPermission()
+
+        // Schedules the regular daily rent reminder check
         scheduleRentReminders()
 
-        // TEMPORARY TEST: uncomment to fire the reminder check immediately,
-        // then comment it out again when you are done testing.
-        // WorkManager.getInstance(this).enqueue(
-        //     androidx.work.OneTimeWorkRequestBuilder<RentReminderWorker>().build()
-        // )
+        // Additional one-time reminder check (disabled after testing)
+        WorkManager.getInstance(this).enqueue(
+            OneTimeWorkRequestBuilder<RentReminderWorker>().build()
+         )
 
         updateDashboardStats()
     }
@@ -112,7 +104,7 @@ class DashboardActivity : AppCompatActivity() {
         }
     }
 
-    // Asks for notification permission on Android 13+
+    // Asks for notification permission
     private fun requestNotificationPermission() {
         if (Build.VERSION.SDK_INT >= 33 &&
             ContextCompat.checkSelfPermission(
