@@ -1,11 +1,19 @@
 package com.example.rentmanagementsystem
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.work.ExistingPeriodicWorkPolicy
+import androidx.work.PeriodicWorkRequestBuilder
+import androidx.work.WorkManager
 import java.util.Locale
+import java.util.concurrent.TimeUnit
 
 class DashboardActivity : AppCompatActivity() {
 
@@ -35,6 +43,9 @@ class DashboardActivity : AppCompatActivity() {
 
         val btnRecordPayment =
             findViewById<Button>(R.id.btnRecordPayment)
+
+        val btnReports =
+            findViewById<Button>(R.id.btnReports)
 
         val welcomeText = findViewById<TextView>(R.id.tvWelcome)
 
@@ -66,6 +77,13 @@ class DashboardActivity : AppCompatActivity() {
             )
         }
 
+        // Opens the Reports screen
+        btnReports.setOnClickListener {
+            startActivity(
+                Intent(this, ReportsActivity::class.java)
+            )
+        }
+
         val email = intent.getStringExtra("email")
 
         welcomeText.text = if (email.isNullOrBlank()) {
@@ -73,6 +91,15 @@ class DashboardActivity : AppCompatActivity() {
         } else {
             "Welcome, $email"
         }
+
+        requestNotificationPermission()
+        scheduleRentReminders()
+
+        // TEMPORARY TEST: uncomment to fire the reminder check immediately,
+        // then comment it out again when you are done testing.
+        // WorkManager.getInstance(this).enqueue(
+        //     androidx.work.OneTimeWorkRequestBuilder<RentReminderWorker>().build()
+        // )
 
         updateDashboardStats()
     }
@@ -83,6 +110,34 @@ class DashboardActivity : AppCompatActivity() {
         if (::dbHelper.isInitialized) {
             updateDashboardStats()
         }
+    }
+
+    // Asks for notification permission on Android 13+
+    private fun requestNotificationPermission() {
+        if (Build.VERSION.SDK_INT >= 33 &&
+            ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.POST_NOTIFICATIONS
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            requestPermissions(
+                arrayOf(Manifest.permission.POST_NOTIFICATIONS),
+                100
+            )
+        }
+    }
+
+    // Schedules the daily check for due and overdue rent
+    private fun scheduleRentReminders() {
+        val request = PeriodicWorkRequestBuilder<RentReminderWorker>(
+            1, TimeUnit.DAYS
+        ).build()
+
+        WorkManager.getInstance(this).enqueueUniquePeriodicWork(
+            "rent_reminders",
+            ExistingPeriodicWorkPolicy.KEEP,
+            request
+        )
     }
 
     private fun updateDashboardStats() {
