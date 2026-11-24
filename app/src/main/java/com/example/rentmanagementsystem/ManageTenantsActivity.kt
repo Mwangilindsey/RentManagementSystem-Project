@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Patterns
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
@@ -35,7 +36,6 @@ class ManageTenantsActivity : AppCompatActivity() {
         val btnSaveTenant = findViewById<Button>(R.id.btnSaveTenant)
         val btnViewTenants = findViewById<Button>(R.id.btnViewTenants)
 
-
         btnBack.setOnClickListener {
             val intent = Intent(this, DashboardActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or
@@ -49,13 +49,15 @@ class ManageTenantsActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-
         properties = dbHelper.getAllProperties()
 
+        val propertyNames = mutableListOf("")
 
-        val propertyNames = properties.map { property ->
-            "${property.name} - ${property.address}"
-        }
+        propertyNames.addAll(
+            properties.map { property ->
+                "${property.name} - ${property.address}"
+            }
+        )
 
         val adapter = object : ArrayAdapter<String>(
             this,
@@ -101,6 +103,36 @@ class ManageTenantsActivity : AppCompatActivity() {
 
         spTenantProperty.adapter = adapter
 
+        spTenantProperty.setSelection(0)
+        etTenantRent.text.clear()
+
+        // Fill monthly rent only when an actual property is selected
+        spTenantProperty.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+
+                    if (position == 0) {
+                        etTenantRent.text.clear()
+                    } else if (position - 1 in properties.indices) {
+
+                        val selectedProperty = properties[position - 1]
+
+                        etTenantRent.setText(
+                            selectedProperty.monthlyRent.toString()
+                        )
+                    }
+                }
+
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+                    etTenantRent.text.clear()
+                }
+            }
 
         btnSaveTenant.setOnClickListener {
 
@@ -145,6 +177,14 @@ class ManageTenantsActivity : AppCompatActivity() {
                     etTenantUnit.requestFocus()
                 }
 
+                spTenantProperty.selectedItemPosition == 0 -> {
+                    Toast.makeText(
+                        this,
+                        "Please select a property",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+
                 rentText.toDoubleOrNull() == null ||
                         rentText.toDouble() <= 0 -> {
                     etTenantRent.error = "Enter a valid monthly rent"
@@ -153,20 +193,10 @@ class ManageTenantsActivity : AppCompatActivity() {
 
                 else -> {
 
-                    // Get the selected property
                     val selectedPosition =
                         spTenantProperty.selectedItemPosition
 
-                    if (selectedPosition !in properties.indices) {
-                        Toast.makeText(
-                            this,
-                            "Please select a property",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                        return@setOnClickListener
-                    }
-
-                    val selectedProperty = properties[selectedPosition]
+                    val selectedProperty = properties[selectedPosition - 1]
 
                     val tenant = Tenant(
                         fullName = fullName,
@@ -187,13 +217,11 @@ class ManageTenantsActivity : AppCompatActivity() {
                             Toast.LENGTH_SHORT
                         ).show()
 
-
                         etTenantName.text.clear()
                         etTenantPhone.text.clear()
                         etTenantEmail.text.clear()
                         etTenantUnit.text.clear()
                         etTenantRent.text.clear()
-
 
                         spTenantProperty.setSelection(0)
 
