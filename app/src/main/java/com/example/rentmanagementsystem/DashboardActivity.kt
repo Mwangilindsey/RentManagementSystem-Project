@@ -89,9 +89,9 @@ class DashboardActivity : AppCompatActivity() {
         scheduleRentReminders()
 
         // Additional one-time reminder check (disabled after testing)
-        WorkManager.getInstance(this).enqueue(
-            OneTimeWorkRequestBuilder<RentReminderWorker>().build()
-         )
+        //WorkManager.getInstance(this).enqueue(
+            //OneTimeWorkRequestBuilder<RentReminderWorker>().build()
+         //)
 
         updateDashboardStats()
     }
